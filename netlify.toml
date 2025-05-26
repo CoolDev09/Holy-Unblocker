@@ -1,0 +1,16 @@
+[build]
+  command   = "npm run build"
+  functions = "functions"
+  publish   = "public"
+
+# Allow embedding the app in iframes
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "ALLOWALL"
+
+[[redirects]]
+  from    = "/proxy/*"
+  to      = "/.netlify/functions/proxy/:splat"
+  status  = 200
+  force   = true
