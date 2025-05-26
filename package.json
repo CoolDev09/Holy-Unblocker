@@ -8,24 +8,10 @@
     "node": "20.x"
   },
   "scripts": {
-    "start": "npm install && npm run build && npm run manual-start",
-    "restart": "node run-command.mjs stop start",
-    "stop": "node run-command.mjs stop",
-    "test": "npm run proxy-validator",
-    "manual-start": "node run-command.mjs start",
-    "kill": "node run-command.mjs stop kill",
     "build": "node run-command.mjs build && cd lib/rammerhead && npm install && npm run build",
-    "proxy-validator": "node proxyServiceValidator.js",
-    "workflow-test": "node run-command.mjs workflow",
-    "deployment": "npm install && npm run build && node backend.js"
+    "start": "node backend.js",
+    "dev": "netlify dev"
   },
-  "keywords": [
-    "proxy",
-    "node.js",
-    "unblocker"
-  ],
-  "author": "Titanium Network",
-  "license": "GNU AFFERO",
   "dependencies": {
     "@fastify/helmet": "^11.1.1",
     "@fastify/static": "^7.0.4",
@@ -45,6 +31,8 @@
   },
   "devDependencies": {
     "@babel/node": "^7.25.0",
-    "esbuild": "^0.23.0"
+    "esbuild": "^0.23.0",
+    "serverless-http": "^3.0.0",
+    "netlify-cli": "^18.0.0"
   }
 }
