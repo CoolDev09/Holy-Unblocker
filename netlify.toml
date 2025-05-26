@@ -1,16 +1,29 @@
-[build]
-  command   = "npm run build"
-  functions = "functions"
-  publish   = "public"
+# netlify.toml
 
-# Allow embedding the app in iframes
+[build]
+  # Build step for your functions
+  command   = "npm run build"
+  # Folder containing your Netlify Functions
+  functions = "functions"
+  # Folder containing your static site (your index.html lives here)
+  publish   = "views"
+
+# Allow embedding the entire site in an iframe
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "ALLOWALL"
 
+# Proxy redirects into your Lambda handler
 [[redirects]]
-  from    = "/proxy/*"
-  to      = "/.netlify/functions/proxy/:splat"
-  status  = 200
-  force   = true
+  from   = "/proxy/*"
+  to     = "/.netlify/functions/proxy/:splat"
+  status = 200
+  force  = true
+
+# Fallback all other routes to index.html
+# (optional, but useful if you ever turn this into an SPA)
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
